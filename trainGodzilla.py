@@ -34,19 +34,20 @@ p_cmd,q_cmd,r_cmd,T_cmd = control
 g = 9.81
 
 # INDI params
-taup = 0.14
-tauq = 0.14
-taur = 0.14
-tauT = 0.14
+taup =  0.38205684394448125
+tauq =  0.38205684394448125
+taur = 10.98805347
+tauT = 0.5654755665147349
+#KT = 2.0392824564266964e-05
 
-p_min = -6.0
-p_max = 6.0
-q_min = -6.0
-q_max = 6.0
-r_min = -2.0
-r_max = 2.0
+p_min = -1.0
+p_max = 1.0
+q_min = -1.0
+q_max = 1.0
+r_min = -.3
+r_max = .3
 T_min = 0.0
-T_max = 16.0
+T_max = 9.81*1.06
 
 # Drag model
 k_x = 0.33915248
@@ -175,7 +176,7 @@ test_env = Quadcopter3DGates(num_envs=10, gates_pos=gate_pos, gate_yaw=gate_yaw,
 env = VecMonitor(env)
 
 # MODEL DEFINITION
-policy_kwargs = dict(activation_fn=torch.nn.ReLU, net_arch=[dict(pi=[120,120,120], vf=[120,120,120])], log_std_init = 0)
+policy_kwargs = dict(activation_fn=torch.nn.ReLU, net_arch=[dict(pi=[80,80,80], vf=[80,80,80])], log_std_init = 0)
 model = PPO(
     "MlpPolicy",
     env,
