@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Docker ONNX2C",
+            "type": "shell",
+            "command": "docker run --rm -v ${workspaceFolder}:/module onnx2c /bin/bash -c './onnx2c/build/onnx2c /module/crazygcnet_quantized.onnx > /module/gcnet.c'",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
