@@ -859,3 +859,11 @@ void entry(const float tensor_input1[1][13], float tensor_output1[1][4]) {
 	node__6_Gemm_MatMul_quant_output_scale_mul( tu0.tensor_output1_MatMul_output_quantized_cast_output, tu1.tensor__6_Gemm_MatMul_quant_scales_mul_0, tu2.tensor_output1_MatMul);
 	node__6_Gemm_Add( tu2.tensor_output1_MatMul, tensor_6_bias, tensor_output1);
 }
+
+void main (void) {
+	float input1[1][13] = {{-2.916933298110962, 2.841855764389038, -0.007863759994506836, -0.17505259811878204, 0.04293742775917053, 0.9415762424468994, 0.08053353428840637, 0.003706212854012847, -0.7468969821929932, 2.09429669380188, 0.9971287250518799, 0.2771109342575073, 0.6462361216545105}};
+	float output1[1][4];
+	entry(input1, output1);
+
+	printf("output1 : %f, %f, %f, %f\n", output1[0][0], output1[0][1], output1[0][2], output1[0][3]);
+}
