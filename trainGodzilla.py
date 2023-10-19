@@ -127,9 +127,6 @@ gate_yaw = np.array([
 # start_pos = gate_pos[0] - np.array([2,0,0])
 start_pos = gate_pos[3] #- np.array([2,0,0])
 
-num = 10
-env = Quadcopter3DGates(num_envs=num, gates_pos=gate_pos, gate_yaw=gate_yaw, start_pos=start_pos, pause_if_collision=False, f_func=f_func)
-
 # Run a random agent
 env.reset()
 
@@ -225,4 +222,4 @@ def train(model, test_env, log_name, n=10000000000):
             break
 
 
-train(model, test_env, 'INDI_TEST2_with_rate_penalty')
+#train(model, test_env, 'INDI_TEST2_with_rate_penalty')
