@@ -4,7 +4,7 @@
         {
             "label": "Run Docker ONNX2C",
             "type": "shell",
-            "command": "docker run --rm -v ${workspaceFolder}:/module onnx2c /bin/bash -c './onnx2c/build/onnx2c /module/crazygcnet_quantized.onnx > /module/gcnet.c'",
+            "command": "docker run --rm -v ${workspaceFolder}:/module onnx2c /bin/bash -c './onnx2c/build/onnx2c /module/results/quantized/crazygcnet_0_gates_quantized.onnx > /module/results/c_code/gcnet.c'",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
