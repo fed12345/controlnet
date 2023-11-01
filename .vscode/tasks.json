@@ -4,12 +4,24 @@
         {
             "label": "Run Docker ONNX2C",
             "type": "shell",
-            "command": "docker run --rm -v ${workspaceFolder}:/module onnx2c /bin/bash -c './onnx2c/build/onnx2c /module/results/quantized/crazygcnet_0_gates_quantized.onnx > /module/results/c_code/gcnet.c'",
+            "command": "docker run --rm -v ${workspaceFolder}:/module onnx2c /bin/bash -c './onnx2c/build/onnx2c /module/${input:onnxFilePath} > /module/results/c_code/${input:cCodeOutputPath}'",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "onnxFilePath",
+            "type": "promptString",
+            "description": "Enter the relative path to the .onnx file (e.g., 'results/quantized/my_model.onnx')"
+        },
+        {
+            "id": "cCodeOutputPath",
+            "type": "promptString",
+            "description": "Enter the name for the output C file (e.g., 'output.c')"
         }
     ]
 }

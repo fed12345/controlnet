@@ -200,7 +200,7 @@ def animate_policy(model, env, deterministic=False, **kwargs):
 # animate untrained policy (use this to set the recording camera position)
 animate_policy(model, test_env)
 
-def train(model, test_env, log_name, n=10000000000):
+def train(model, test_env, log_name, n=1000):
     # save every 10 policy rollouts
     TIMESTEPS = model.n_steps*env.num_envs*10
     for i in range(0,n):
