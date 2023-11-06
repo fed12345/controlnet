@@ -179,7 +179,11 @@ class Quadcopter3DGates(VecEnv):
         d2g_old = np.linalg.norm(pos_old - pos_gate, axis=1)
         d2g_new = np.linalg.norm(pos_new - pos_gate, axis=1)
         rat_penalty = 0.01*np.linalg.norm(new_states[:,9:12], axis=1)
-        rewards = d2g_old - d2g_new - rat_penalty
+        #Yaw Penalty
+        yaw_penalty = (new_states[:, 8]-yaw_gate)**2
+
+        rewards = d2g_old - d2g_new - rat_penalty - yaw_penalty
+
         
         normal = np.array([np.cos(yaw_gate), np.sin(yaw_gate)]).T
         # dot product of normal and position vector over axis 1

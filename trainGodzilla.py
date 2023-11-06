@@ -15,7 +15,7 @@ print("cuda version:", torch.version.cuda)
 print("cudnn version:", torch.backends.cudnn.version())
 
 # set device
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 print("device:", device)
 
 # set torch default device
@@ -173,7 +173,7 @@ test_env = Quadcopter3DGates(num_envs=10, gates_pos=gate_pos, gate_yaw=gate_yaw,
 env = VecMonitor(env)
 
 # MODEL DEFINITION
-policy_kwargs = dict(activation_fn=torch.nn.ReLU, net_arch=[dict(pi=[80,80,80], vf=[80,80,80])], log_std_init = 0)
+policy_kwargs = dict(activation_fn=torch.nn.ReLU, net_arch=[dict(pi=[100,100,100], vf=[100,100,100])], log_std_init = 0)
 model = PPO(
     "MlpPolicy",
     env,
@@ -218,8 +218,6 @@ def train(model, test_env, log_name, n=1000):
             show_window=False
         )
         all_items = os.listdir(models_dir + '/' + log_name)
-        if len(all_items) > 50:
-            break
 
 
 #train(model, test_env, 'INDI_TEST2_with_rate_penalty')
