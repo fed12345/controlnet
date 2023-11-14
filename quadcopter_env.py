@@ -2,7 +2,7 @@
 from gym import spaces
 from stable_baselines3.common.vec_env import VecEnv
 import numpy as np
-
+import csv
 class Quadcopter3DGates(VecEnv):
     def __init__(self,
                  num_envs,
@@ -12,6 +12,7 @@ class Quadcopter3DGates(VecEnv):
                  f_func,
                  gates_ahead=0,
                  pause_if_collision=False,
+                 record_sim=False
                  
                  ):
         
@@ -22,6 +23,8 @@ class Quadcopter3DGates(VecEnv):
         self.num_gates = gates_pos.shape[0]
         self.gates_ahead = gates_ahead
         self.f_func = f_func
+        self.sim_csv = 'crazyflie_dataset/sim.csv'
+        self.record_sim = record_sim
         
         # Pause if collision
         self.pause_if_collision = pause_if_collision
@@ -64,7 +67,7 @@ class Quadcopter3DGates(VecEnv):
         self.states = np.zeros((num_envs,self.state_len), dtype=np.float32)
 
         # Define any other environment-specific parameters
-        self.max_steps = 1200      # Maximum number of steps in an episode
+        self.max_steps = 2000      # Maximum number of steps in an episode
         self.dt = np.float32(0.01) # Time step duration
 
         self.step_counts = np.zeros(num_envs, dtype=int)
@@ -192,7 +195,8 @@ class Quadcopter3DGates(VecEnv):
         passed_gate_plane = (pos_old_projected < 0) & (pos_new_projected > 0)
         gate_passed = passed_gate_plane & np.all(np.abs(pos_new - pos_gate)<0.5, axis=1)
         gate_collision = passed_gate_plane & np.any(np.abs(pos_new - pos_gate)>0.5, axis=1)
-        
+        print(new_states[:, 8])
+        print(self.gate_yaw_rel[self.target_gates%self.num_gates])
         # gate reward (+ dist penalty)
         rewards[gate_passed] = 10 #- 10*d2g_new[gate_passed]
         
@@ -225,7 +229,10 @@ class Quadcopter3DGates(VecEnv):
         # Check if the episode is done
         dones = max_steps_reached | ground_collision | gate_collision | out_of_bounds #| self.final_gate_passed
         self.dones = dones
-        
+        if self.record_sim:
+            with open(self.sim_csv, 'a', newline='') as csvfile:
+                writer = csv.writer(csvfile, delimiter=',')
+                writer.writerow(np.append(self.world_states[0],self.step_counts[0]))
         # Pause if collision
         if self.pause:
             dones = dones & ~dones

@@ -5,13 +5,13 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 
 # Load the data from the CSV
-data = pd.read_csv('crazyflie_dataset/rollandpitch.csv')
+data = pd.read_csv('crazyflie_dataset/thrust.csv')
 time = data['timeTick'].values * 1e-3
 dt = time[1] - time[0]
 #make time start at 0
 time = time - time[0]
-input_signal = data[' desRollRate'].values 
-output_signal = data[' gyrox'].values
+input_signal = data[' desThrustCmd'].values 
+output_signal = data[' desAccelZ'].values
 
 # Estimate the derivative of the output
 dydt = np.gradient(output_signal, time)
@@ -37,7 +37,7 @@ print("Estimated time constant tau:", tau_estimated)
 
 
 
-plt.figure(figsize=(10, 8))
+plt.figure(figsize=(6, 4))
 plt.title("First order delay model - Thrust")
 plt.plot(time, input_signal*K_estimated, label='Input')
 plt.plot(time, output_signal, label='Output')
@@ -45,7 +45,7 @@ plt.plot(time, output_signal, label='Output')
 plt.plot(time, firstorderdelay(input_signal,K_estimated, tau_estimated), label='Model')
 #label axis
 plt.xlabel('Time [s]')
-plt.ylabel('Rate [Gs]')
+plt.ylabel('Thrust [Gs]')
 plt.grid()
 plt.legend()
 plt.show()
