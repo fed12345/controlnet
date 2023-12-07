@@ -114,7 +114,7 @@ def view(get_drone_state=get_drone_state_zero,
 
         pos = np.stack([state['x'], state['y'], state['z']]).T
         ori = np.stack([state['phi'], state['theta'], state['psi']]).T
-        u = np.stack([state['u1'], state['u2'], state['u3'], state['u4']]).T
+        #u = np.stack([state['u1'], state['u2'], state['u3'], state['u4']]).T
 
         # update camera
         if follow:
@@ -132,7 +132,7 @@ def view(get_drone_state=get_drone_state_zero,
         if len(pos.shape) == 1: # single drone
             drone.translate(pos-drone.pos)
             drone.rotate(ori)
-            graphics.set_thrust(drone, forces, u*scl)
+            #graphics.set_thrust(drone, forces, u*scl)
             # draw drone
             drone.draw(frame, cam, color=(255, 0, 0), pt=2)
 
@@ -140,11 +140,36 @@ def view(get_drone_state=get_drone_state_zero,
             if draw_forces:
                 for force in forces:
                     force.draw(frame, cam, color=(0, 0, 255), pt=2)
+        elif len(pos.shape) == 2: # multiple drones
+                drone.translate(pos[0]-drone.pos)
+                drone.rotate(ori[0])
+                #graphics.set_thrust(drone, forces, u[i]*scl)
+
+                # draw drone
+                drone.draw(frame, cam, color=(255, 0, 0), pt=2)
+
+                # draw forces
+                if draw_forces:
+                    for force in forces:
+                        force.draw(frame, cam, color=(0, 0, 255), pt=2)
+                #Real Drone
+        
+                drone.translate(pos[1]-drone.pos)      
+                drone.rotate(ori[1])
+                #graphics.set_thrust(drone, forces, u[i]*scl)
+
+                # draw drone
+                drone.draw(frame, cam, color=(0, 255, 0), pt=2)
+
+                # draw forces
+                if draw_forces:
+                    for force in forces:
+                        force.draw(frame, cam, color=(0, 0, 255), pt=2)
         else: # multiple drones
             for i in range(pos.shape[0]):
                 drone.translate(pos[i]-drone.pos)
                 drone.rotate(ori[i])
-                graphics.set_thrust(drone, forces, u[i]*scl)
+                #graphics.set_thrust(drone, forces, u[i]*scl)
 
                 # draw drone
                 drone.draw(frame, cam, color=(255, 0, 0), pt=2)
