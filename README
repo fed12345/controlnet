@@ -1,0 +1,25 @@
+# G&C Network
+
+This project consists in training a feedfoward network using reinforcement learning to fly a drone through a set of gates. More information of this project can be found on the following scientific paper.
+
+
+## Description
+
+An in-depth paragraph about your project and overview of use.
+
+## Getting Started
+
+### Dependencies
+
+- Describe any prerequisites, libraries, OS version, etc., needed before installing the program.
+- ex. Windows 10
+
+### Installing
+
+- How/where to download your program
+- Any modifications needed to be made to files/folders
+
+### Executing program
+
+- How to run the program
+- Step-by-step bullets

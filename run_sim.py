@@ -11,7 +11,7 @@ import importlib
 # reload sympy
 from sympy import *
 
-path = "models/135000000_newreward_40.zip"
+path = "models/776000000_fast_yaw.zip"
 
 print("python version:", sys.version)
 print("stable_baselines3 version:", stable_baselines3.__version__)
@@ -46,14 +46,14 @@ tauq =  0.036791804
 taur = 1.1111354055
 tauT = 0.05654755
 
-p_min = -0.2
-p_max = 0.2
-q_min = -0.2
-q_max = 0.2
+p_min = -0.6
+p_max = 0.6
+q_min = -0.6
+q_max = 0.6
 r_min = -.6
 r_max = .6
 T_min = 0.0
-T_max = 9.81*1.08
+T_max = 9.81*1.1
 # Drag model
 k_x = 0.33915248
 k_y = 0.4314916

@@ -12,7 +12,8 @@ class Quadcopter3DGates(VecEnv):
                  f_func,
                  gates_ahead=0,
                  pause_if_collision=False,
-                 record_sim=False
+                 record_sim=False,
+                 sim_csv = 'sim.csv'
                  
                  ):
         
@@ -23,7 +24,7 @@ class Quadcopter3DGates(VecEnv):
         self.num_gates = gates_pos.shape[0]
         self.gates_ahead = gates_ahead
         self.f_func = f_func
-        self.sim_csv = 'crazyflie_dataset/sim.csv'
+        self.sim_csv = sim_csv
         self.record_sim = record_sim
         
         # Pause if collision
