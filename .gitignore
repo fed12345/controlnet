@@ -1,10 +1,5 @@
 myenv/
 __pycache__/
 output.mp4
-models/
-logs/ 
-videos/
-results/c_code/
-results/onnx/
-results/quantized/
+
 
