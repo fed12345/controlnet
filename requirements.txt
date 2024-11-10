@@ -1,5 +1,4 @@
 absl-py==1.4.0
-ale-py==0.7.4
 anyio==4.0.0
 appnope==0.1.3
 argon2-cffi==23.1.0
@@ -144,3 +143,4 @@ websocket-client==1.6.3
 Werkzeug==2.3.7
 widgetsnbextension==4.0.8
 zipp==3.16.2
+ale-py==0.7.4

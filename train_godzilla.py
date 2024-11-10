@@ -151,9 +151,9 @@ from stable_baselines3.common.vec_env import VecMonitor
 import importlib
 from quadcopter_animation import animation
 
-models_dir = 'models/PPO_INDI'
-log_dir = 'logs/PPO_INDI'
-video_log_dir = 'videos/PPO_INDI'
+models_dir = 'results/models/PPO_INDI'
+log_dir = 'resultslogs/PPO_INDI'
+video_log_dir = 'results/videos/PPO_INDI'
 
 if not os.path.exists(models_dir):
     os.makedirs(models_dir)
@@ -220,4 +220,4 @@ def train(model, test_env, log_name, n=1000):
         all_items = os.listdir(models_dir + '/' + log_name)
 
 
-#train(model, test_env, 'INDI_TEST2_with_rate_penalty')
+train(model, test_env, 'INDI_TEST2_with_rate_penalty')
